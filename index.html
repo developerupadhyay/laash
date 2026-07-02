@@ -41,8 +41,7 @@
     body.cursor-hover #cursor-trail{width:64px;height:64px;border-color:var(--gold)}
 
     /* ===== PAGE NAVIGATION ===== */
-    .page{display:none}
-    .page.active{display:block}
+    /* Removed page classes for permanent visibility */
 
     /* ===== ANNOUNCEMENT BAR ===== */
     #ann-bar{background:var(--ink);height:40px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:sticky;top:0;z-index:200}
@@ -556,6 +555,30 @@
     .mobile-menu a:hover,.mobile-menu button:hover{opacity:1}
     .mobile-close{position:absolute;top:32px;right:32px;font-size:24px;color:rgba(255,255,255,0.5);cursor:none;line-height:1}
 
+    /* ===== SHOP SHOWCASE ===== */
+    #shop-showcase{padding:100px 80px;background:var(--cream)}
+    .shop-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px}
+    .shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+    .shop-card{cursor:none;position:relative}
+    .shop-img{position:relative;height:380px;overflow:hidden;margin-bottom:20px;background:var(--white)}
+    .shop-img img{transition:transform 0.8s var(--ease);object-position:center top}
+    .shop-card:hover .shop-img img{transform:scale(1.05)}
+    .shop-hover{
+      position:absolute;inset:0;background:rgba(255,255,255,0.85);
+      display:flex;align-items:center;justify-content:center;
+      opacity:0;transition:opacity 0.4s ease;
+    }
+    .shop-card:hover .shop-hover{opacity:1}
+    .shop-hover-btn{
+      padding:14px 28px;border:1px solid var(--ink);
+      font-family:var(--f-sans);font-size:9px;font-weight:400;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--ink);background:transparent;transition:all 0.3s ease;
+    }
+    .shop-card:hover .shop-hover-btn{background:var(--ink);color:var(--white)}
+    .shop-cat{font-family:var(--f-sans);font-size:9px;letter-spacing:0.2em;text-transform:uppercase;color:var(--stone-lt);margin-bottom:8px}
+    .shop-name{font-family:var(--f-serif);font-weight:300;font-size:22px;color:var(--ink);margin-bottom:8px}
+    .shop-price{font-family:var(--f-sans);font-size:12px;font-weight:300;color:var(--stone)}
+
     /* ===== RESPONSIVE ===== */
     @media(max-width:1024px){
       #nav{padding:0 32px}
@@ -599,19 +622,21 @@
       .reviews-grid{grid-template-columns:1fr}
       #also-like{padding:80px 40px}
       .also-grid{grid-template-columns:repeat(2,1fr)}
+      #shop-showcase{padding:80px 40px}
+      .shop-grid{grid-template-columns:repeat(2,1fr)}
       .nav-menu{display:none}
       .nav-burger{display:flex}
     }
     @media(max-width:768px){
       #nav{padding:0 24px;height:64px}
       .hero-content{padding:0 24px 64px}
-      #services, #about, #press, #testimonials, .bridal-content, #stats, #booking, footer, .laash-layout, .laash-breadcrumb, .laash-benefits, #laash-howto, #laash-reviews, #also-like{padding-left:24px;padding-right:24px}
+      #services, #about, #press, #testimonials, .bridal-content, #stats, #booking, footer, .laash-layout, .laash-breadcrumb, .laash-benefits, #laash-howto, #laash-reviews, #also-like, #shop-showcase{padding-left:24px;padding-right:24px}
       .gallery-masonry{grid-template-columns:1fr}
       .gallery-item:nth-child(1), .gallery-item:nth-child(3), .gallery-item:nth-child(7), .gallery-item:nth-child(8){grid-column:auto;grid-row:auto}
       .press-logos-row{gap:24px;justify-content:center}
       .press-pub .press-logo{height:20px}
       .press-logo-text{font-size:20px}
-      .howto-grid, .stats-grid, .also-grid{grid-template-columns:1fr}
+      .howto-grid, .stats-grid, .also-grid, .shop-grid{grid-template-columns:1fr}
       .qr-panel{padding:32px;gap:32px}
       .nav-logo img{height:36px}
     }
@@ -631,7 +656,7 @@
     <a href="#" onclick="scrollTo('gallery');closeMobileMenu()">Gallery</a>
     <a href="#" onclick="scrollTo('testimonials');closeMobileMenu()">Reviews</a>
     <a href="#" onclick="scrollTo('bridal');closeMobileMenu()">Bridal</a>
-    <button onclick="showPage('laash-page');closeMobileMenu()">LAASH™</button>
+    <button onclick="scrollTo('laash-page');closeMobileMenu()">LAASH™</button>
     <a href="#" onclick="scrollTo('booking');closeMobileMenu()">Enquire</a>
   </div>
 
@@ -645,7 +670,7 @@
 
   <!-- NAVIGATION -->
   <nav id="nav" class="on-dark">
-    <div class="nav-logo" onclick="goHome()">
+    <div class="nav-logo" onclick="scrollTo('home-page')">
       <img src="images/Kelly+Marie+++makeup+logo-01.png" alt="Kelly Marié Makeup">
     </div>
     <div class="nav-menu">
@@ -653,7 +678,7 @@
       <a href="#" onclick="return scrollTo('about')">About</a>
       <a href="#" onclick="return scrollTo('gallery')">Gallery</a>
       <a href="#" onclick="return scrollTo('bridal')">Bridal</a>
-      <button onclick="showPage('laash-page')" style="font-family:var(--f-sans);font-size:10px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-lt);transition:color 0.3s ease">LAASH™</button>
+      <button onclick="scrollTo('laash-page')" style="font-family:var(--f-sans);font-size:10px;font-weight:300;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-lt);transition:color 0.3s ease">LAASH™</button>
       <a href="#" onclick="return scrollTo('booking')" class="btn-book btn nav-book">Enquire Now</a>
     </div>
     <button class="nav-burger" id="burger" onclick="openMobileMenu()">
@@ -662,7 +687,7 @@
   </nav>
 
   <!-- ========= HOME PAGE ========= -->
-  <div id="home-page" class="page active">
+  <div id="home-page">
 
     <!-- HERO -->
     <section id="hero">
@@ -798,6 +823,55 @@
           <p class="about-text">Based in Sydney, NSW, Kelly and her team are available for weddings, events, editorial shoots, and corporate productions across Australia and internationally.</p>
           <div class="about-signature">Kelly Marié</div>
           <div class="about-sig-sub">Lead Makeup Artist · Founder</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP SHOWCASE -->
+    <section id="shop-showcase">
+      <div class="shop-header">
+        <div>
+          <p class="eyebrow reveal">The Collection</p>
+          <h2 class="section-heading reveal d1" style="font-size:clamp(36px,4vw,56px);color:var(--ink)">Shop LAASH™</h2>
+        </div>
+        <a href="#" onclick="return scrollTo('laash-page')" class="btn btn-dark reveal d2">View All Products</a>
+      </div>
+      <div class="shop-grid">
+        <div class="shop-card reveal" onclick="scrollTo('laash-page')">
+          <div class="shop-img">
+            <img src="images/Bridal_Hero_Cropped2.jpg" alt="LAASH Classic Kit">
+            <div class="shop-hover"><button class="shop-hover-btn">View Details</button></div>
+          </div>
+          <div class="shop-cat">Starter Kit</div>
+          <div class="shop-name">Classic Collection</div>
+          <div class="shop-price">$89.00 AUD</div>
+        </div>
+        <div class="shop-card reveal d1" onclick="scrollTo('laash-page')">
+          <div class="shop-img">
+            <img src="images/ach_0151.jpeg" alt="LAASH Wispy Kit">
+            <div class="shop-hover"><button class="shop-hover-btn">View Details</button></div>
+          </div>
+          <div class="shop-cat">Starter Kit</div>
+          <div class="shop-name">Wispy Collection</div>
+          <div class="shop-price">$89.00 AUD</div>
+        </div>
+        <div class="shop-card reveal d2" onclick="scrollTo('laash-page')">
+          <div class="shop-img">
+            <img src="images/image0+(4).jpeg" alt="LAASH Bond">
+            <div class="shop-hover"><button class="shop-hover-btn">View Details</button></div>
+          </div>
+          <div class="shop-cat">Refill</div>
+          <div class="shop-name">LAASH Bond</div>
+          <div class="shop-price">$24.00 AUD</div>
+        </div>
+        <div class="shop-card reveal d3" onclick="scrollTo('laash-page')">
+          <div class="shop-img">
+            <img src="images/www.kristinayenko.com-beatrys-15.jpg" alt="LAASH Sealer">
+            <div class="shop-hover"><button class="shop-hover-btn">View Details</button></div>
+          </div>
+          <div class="shop-cat">Refill</div>
+          <div class="shop-name">LAASH Sealer</div>
+          <div class="shop-price">$22.00 AUD</div>
         </div>
       </div>
     </section>
@@ -1050,7 +1124,7 @@
             <a href="#">Portfolio</a>
             <a href="#">Press</a>
             <a href="#">FAQ</a>
-            <a href="#" onclick="showPage('laash-page')">LAASH™</a>
+            <a href="#" onclick="scrollTo('laash-page')">LAASH™</a>
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Contact</div>
@@ -1083,7 +1157,7 @@
 
 
   <!-- ========= LAASH PRODUCT PAGE ========= -->
-  <div id="laash-page" class="page">
+  <div id="laash-page">
 
     <!-- LAASH Hero -->
     <section id="laash-hero">
@@ -1106,7 +1180,7 @@
     <!-- Product Section -->
     <div id="laash-product">
       <div class="laash-breadcrumb">
-        <div class="back-btn" onclick="goHome()">← Back to Kelly Marié</div>
+        <div class="back-btn" onclick="scrollTo('home-page')">← Back to Kelly Marié</div>
         <div class="breadcrumb-path">Home / LAASH™ / <span>Classic Starter Kit</span></div>
       </div>
 
@@ -1291,7 +1365,7 @@
       <p class="eyebrow reveal">Complete Your Collection</p>
       <h2 class="section-heading reveal d1" style="font-size:clamp(30px,3.5vw,42px)">You May Also Like</h2>
       <div class="also-grid">
-        <div class="also-card reveal" onclick="showPage('laash-page')">
+        <div class="also-card reveal" onclick="scrollTo('laash-page')">
           <div class="also-img"><img src="images/image0+(4).jpeg" alt="LAASH Bond" style="object-position:center top"></div>
           <div class="also-cat">Refill</div>
           <div class="also-name">LAASH Bond</div>
@@ -1303,7 +1377,7 @@
           <div class="also-name">LAASH Sealer</div>
           <div class="also-price">$22.00 AUD</div>
         </div>
-        <div class="also-card reveal d2" onclick="showPage('laash-page')">
+        <div class="also-card reveal d2" onclick="scrollTo('laash-page')">
           <div class="also-img"><img src="images/ach_0151.jpeg" alt="LAASH Wispy Kit" style="object-position:center 25%"></div>
           <div class="also-cat">Starter Kit</div>
           <div class="also-name">Wispy Style</div>
@@ -1336,7 +1410,7 @@
           </div>
           <div class="footer-col">
             <div class="footer-col-title">About</div>
-            <a href="#" onclick="goHome()">Kelly Marié</a>
+            <a href="#" onclick="scrollTo('home-page')">Kelly Marié</a>
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
           </div>
@@ -1429,13 +1503,7 @@
   initObs();
 
   // ---- PAGE NAVIGATION ----
-  function showPage(id){
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    window.scrollTo({top:0,behavior:'instant'});
-    setTimeout(()=>{updateNav();initObs();},60);
-  }
-  function goHome(){showPage('home-page');}
+  // Sections are permanently visible
 
   function scrollTo(id){
     const el=document.getElementById(id);
